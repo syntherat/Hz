@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Sidebar } from "@/components/recipe/sidebar";
+import { RecipeMenu } from "@/components/recipe/recipe-menu";
 import { Playground } from "@/components/recipe/playground";
 import { Curve } from "@/components/curve";
 import { details } from "@/content/details";
@@ -50,9 +51,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
       highlight(`# with the shadcn CLI, adds the file and its dependencies\n${install}\n\n# or copy the file, then\nnpm i gsap @gsap/react`, "bash"),
     ]);
     body = (
-      <>
-        <Playground recipe={recipe} source={source} lines={lines} installLines={installLines} install={install} />
-
+      <Playground recipe={recipe} source={source} lines={lines} installLines={installLines} install={install}>
         <section className="flex flex-col gap-4">
           <h2 className="text-[28px] font-medium tracking-[-0.03em]">Why it feels right</h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3">
@@ -68,7 +67,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
             <p className="flex-[1_1_320px] text-[15px] leading-[1.55] text-ink-2">{d.accessibility}</p>
           </div>
         </section>
-      </>
+      </Playground>
     );
   } else {
     body = (
@@ -96,11 +95,12 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   }
 
   return (
-    <div className="mx-auto flex max-w-[1440px] flex-wrap items-start gap-10 px-4 pt-8 pb-16 sm:px-6">
+    <div className="mx-auto flex max-w-[1440px] flex-wrap items-start gap-10 px-4 pt-2 pb-16 sm:px-6 lg:pt-8">
       <Sidebar current={slug} />
       <main className="flex min-w-0 flex-[999_1_640px] flex-col gap-8">
+        <RecipeMenu current={slug} id={recipe.id} total={recipes.length} />
         <div className="flex flex-col gap-3.5">
-          <nav aria-label="Breadcrumb" className="font-mono text-xs text-muted">
+          <nav aria-label="Breadcrumb" className="hidden font-mono text-xs text-muted lg:block">
             <Link href="/" className="hover:text-ink">Recipes</Link> / {recipe.section} / {recipe.id}
           </nav>
           {!recipe.ready && (
