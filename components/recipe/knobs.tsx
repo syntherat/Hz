@@ -77,6 +77,25 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
           );
         }
 
+        if (k.kind === "option") {
+          const picked = k.options.find((o) => o.value === value) ?? k.options[0];
+          return (
+            <fieldset key={k.id} className="flex flex-col gap-2.5">
+              <legend className="contents">
+                <Head label={k.label} value={picked.head ?? picked.label} />
+              </legend>
+              <div role="radiogroup" aria-label={k.label} className={`grid gap-1.5 ${k.options.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+                {k.options.map((o) => (
+                  <button key={o.value} type="button" role="radio" aria-checked={o.value === value} onClick={() => onChange(k.id, o.value)} className={segment(o.value === value)}>
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+              {picked.note && <p className="text-[13px] leading-normal text-ink-2">{picked.note}</p>}
+            </fieldset>
+          );
+        }
+
         return (
           <div key={k.id} className="flex flex-col gap-2.5">
             <label htmlFor={`knob-${k.id}`}>

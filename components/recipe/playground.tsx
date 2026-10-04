@@ -24,6 +24,7 @@ export function Playground({ recipe, source, lines, installLines, install }: Pla
   const [slow, setSlow] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [readout, setReadout] = useState("");
+  const [tools, setTools] = useState<HTMLElement | null>(null);
 
   const onReadout = useCallback((text: string) => setReadout(text), []);
   const code = () => applyKnobs(source, d.knobs, values);
@@ -44,8 +45,16 @@ export function Playground({ recipe, source, lines, installLines, install }: Pla
   return (
     <>
       <div className="flex flex-wrap items-stretch gap-4">
-        <Stage label={recipe.id} readout={readout} slow={slow} reduced={reduced} onSlow={setSlow} onReduced={setReduced}>
-          <Demo values={values} reduced={reduced} onReadout={onReadout} />
+        <Stage
+          label={recipe.id}
+          readout={readout}
+          slow={slow}
+          reduced={reduced}
+          onSlow={setSlow}
+          onReduced={setReduced}
+          tools={<div ref={setTools} className="contents" />}
+        >
+          <Demo values={values} reduced={reduced} onReadout={onReadout} tools={tools} />
         </Stage>
         <Knobs
           knobs={d.knobs}

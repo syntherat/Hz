@@ -15,6 +15,32 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "pinned-horizontal-gallery",
+      "type": "registry:component",
+      "title": "Pinned horizontal gallery",
+      "description": "A section that pins while vertical scroll moves its panels sideways. GSAP ScrollTrigger, falls back to a native scroller under reduced motion.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/pinned-horizontal-gallery/pinned-horizontal-gallery.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "inertia-carousel",
+      "type": "registry:component",
+      "title": "Inertia carousel",
+      "description": "A carousel you can fling: it glides with the speed of your hand and lands on a slide. GSAP Draggable and InertiaPlugin, with previous and next buttons.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/inertia-carousel/inertia-carousel.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
