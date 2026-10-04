@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Curve } from "@/components/curve";
 import { eases, shortEaseName } from "@/lib/eases";
 import type { Knob, KnobValue } from "@/content/details";
@@ -26,8 +27,13 @@ function Head({ label, value }: { label: string; value: string }) {
 }
 
 export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
+  const [open, setOpen] = useState(false);
+  const rest = knobs.filter((k) => k.kind !== "ease");
+  // on phones only the ease row shows until "All knobs" is opened
+  const fold = open ? "" : "max-sm:hidden";
+
   return (
-    <div className="flex min-w-0 flex-[1_1_280px] flex-col gap-[22px] rounded-[20px] border border-hairline bg-surface p-5">
+    <div className="flex min-w-0 flex-[1_1_280px] flex-col gap-[22px] max-sm:gap-5 sm:rounded-[20px] sm:border sm:border-hairline sm:bg-surface sm:p-5">
       <div className="flex items-baseline justify-between">
         <h2 className="text-[15px] font-semibold">Knobs</h2>
         <button type="button" onClick={onReset} className="py-2 font-mono text-xs text-muted hover:text-ink">
@@ -40,16 +46,20 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
 
         if (k.kind === "ease") {
           return (
-            <fieldset key={k.id} className="flex flex-col gap-2.5">
+            <fieldset key={k.id} className="flex min-w-0 flex-col gap-2.5">
               <legend className="contents">
                 <Head label={k.label} value={String(value)} />
               </legend>
-              <div className="rounded-[10px] bg-ground p-2.5">
+              <div className="rounded-[10px] bg-ground p-2.5 max-sm:hidden">
                 <Curve ease={String(value)} className="h-[120px] w-full" />
               </div>
-              <div role="radiogroup" aria-label={k.label} className="grid grid-cols-2 gap-1.5">
+              <div
+                role="radiogroup"
+                aria-label={k.label}
+                className="-mx-4 flex gap-1.5 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:px-0 [&::-webkit-scrollbar]:hidden"
+              >
                 {k.options.map((o) => (
-                  <button key={o} type="button" role="radio" aria-checked={o === value} onClick={() => onChange(k.id, o)} className={`${segment(o === value)} text-left`}>
+                  <button key={o} type="button" role="radio" aria-checked={o === value} onClick={() => onChange(k.id, o)} className={`${segment(o === value)} flex-none text-left`}>
                     {shortEaseName(o)}
                   </button>
                 ))}
@@ -61,7 +71,7 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
 
         if (k.kind === "choice") {
           return (
-            <fieldset key={k.id} className="flex flex-col gap-2.5">
+            <fieldset key={k.id} className={`flex flex-col gap-2.5 ${fold}`}>
               <legend className="contents">
                 <Head label={k.label} value={`${Number(value).toFixed(2)}${k.unit ?? ""}`} />
               </legend>
@@ -80,7 +90,7 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
         if (k.kind === "option") {
           const picked = k.options.find((o) => o.value === value) ?? k.options[0];
           return (
-            <fieldset key={k.id} className="flex flex-col gap-2.5">
+            <fieldset key={k.id} className={`flex flex-col gap-2.5 ${fold}`}>
               <legend className="contents">
                 <Head label={k.label} value={picked.head ?? picked.label} />
               </legend>
@@ -97,7 +107,7 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
         }
 
         return (
-          <div key={k.id} className="flex flex-col gap-2.5">
+          <div key={k.id} className={`flex flex-col gap-2.5 ${fold}`}>
             <label htmlFor={`knob-${k.id}`}>
               <Head label={k.label} value={Number(value).toFixed(2)} />
             </label>
@@ -114,6 +124,18 @@ export function Knobs({ knobs, values, onChange, onReset }: KnobsProps) {
           </div>
         );
       })}
+
+      {rest.length > 0 && (
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="flex h-11 items-center justify-between gap-3 rounded-[10px] border border-hairline bg-surface px-3.5 text-left text-sm text-ink sm:hidden"
+        >
+          {open ? "Fewer knobs" : "All knobs"}
+          {!open && <span className="truncate font-mono text-xs text-muted">{rest.map((k) => k.label.toLowerCase()).join(", ")}</span>}
+        </button>
+      )}
     </div>
   );
 }
