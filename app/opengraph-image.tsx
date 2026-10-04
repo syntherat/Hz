@@ -15,7 +15,7 @@ export default async function Image() {
         title={site.tagline}
         ease="expo.out"
         meta="Interaction recipes. Tuned, explained, copy-ready."
-        command={`npx shadcn add ${site.url.replace(/^https?:\/\//, "")}/r/...`}
+        command={`npx shadcn add ${site.url}/r/...`}
       />
     ),
     { ...size, fonts: await ogFonts() },

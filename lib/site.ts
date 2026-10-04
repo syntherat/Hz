@@ -13,5 +13,5 @@ export function installCommand(slug: string) {
 }
 
 export function shortInstallCommand(slug: string) {
-  return `npx shadcn add ${site.url.replace(/^https?:\/\//, "")}/r/${slug}`;
+  return `npx shadcn add ${site.url}/r/${slug}`;
 }
