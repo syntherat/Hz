@@ -17,6 +17,123 @@
       ]
     },
     {
+      "name": "line-mask-headline",
+      "type": "registry:component",
+      "title": "Line-mask headline",
+      "description": "A headline whose lines rise from behind a mask, one after another. GSAP SplitText with autoSplit, static under reduced motion.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/line-mask-headline/line-mask-headline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "odometer",
+      "type": "registry:component",
+      "title": "Odometer",
+      "description": "A number whose digits roll into place like a mechanical counter. GSAP timeline, accessible value, jumps under reduced motion.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/odometer/odometer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "text-scramble",
+      "type": "registry:component",
+      "title": "Text scramble",
+      "description": "Text that decodes into place from random characters. GSAP ScrambleTextPlugin, screen readers get the final text.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/text-scramble/text-scramble.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "copy-button-morph",
+      "type": "registry:component",
+      "title": "Copy-button morph",
+      "description": "A copy button whose clipboard icon morphs into a check with a small pop. GSAP MorphSVGPlugin, announces the copy.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/copy-button-morph/copy-button-morph.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "directional-underline",
+      "type": "registry:component",
+      "title": "Directional underline",
+      "description": "A link underline that enters and leaves from the side the cursor came from. GSAP core with clip-path, keyboard focus shows the line.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/directional-underline/directional-underline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "squash-toggle",
+      "type": "registry:component",
+      "title": "Squash toggle",
+      "description": "A switch whose knob squashes and stretches as it travels. GSAP core, role=switch, no squash under reduced motion.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/squash-toggle/squash-toggle.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sliding-tab-indicator",
+      "type": "registry:component",
+      "title": "Sliding tab indicator",
+      "description": "Tabs with an indicator that slides and resizes to the selected tab. GSAP Flip, full keyboard support.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/sliding-tab-indicator/sliding-tab-indicator.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "flip-filter-grid",
+      "type": "registry:component",
+      "title": "Flip filter grid",
+      "description": "A filterable grid whose items glide to their new places. GSAP Flip with enter and leave animations.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/flip-filter-grid/flip-filter-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "card-to-detail",
+      "type": "registry:component",
+      "title": "Card to detail",
+      "description": "A card that grows into its detail view and back. GSAP Flip, focus managed, Escape closes.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/card-to-detail/card-to-detail.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "pinned-horizontal-gallery",
       "type": "registry:component",
       "title": "Pinned horizontal gallery",
@@ -30,6 +147,84 @@
       ]
     },
     {
+      "name": "stacking-cards",
+      "type": "registry:component",
+      "title": "Stacking cards",
+      "description": "Cards that stack and shrink back as you scroll. CSS sticky plus GSAP ScrollTrigger scrub.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/stacking-cards/stacking-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "height-auto-accordion",
+      "type": "registry:component",
+      "title": "Height-auto accordion",
+      "description": "An accordion that opens to its natural height with contents fading in one by one. GSAP core, closed panels are inert.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/height-auto-accordion/height-auto-accordion.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scroll-read-highlight",
+      "type": "registry:component",
+      "title": "Scroll-read highlight",
+      "description": "A paragraph whose words light up as you scroll. GSAP ScrollTrigger scrub, read once by screen readers.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/scroll-read-highlight/scroll-read-highlight.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "clip-path-image-reveal",
+      "type": "registry:component",
+      "title": "Clip-path image reveal",
+      "description": "A clip-path wipe while the image inside scales down, played once in view. GSAP core and IntersectionObserver.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/clip-path-image-reveal/clip-path-image-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "svg-line-draw",
+      "type": "registry:component",
+      "title": "SVG line draw",
+      "description": "Strokes in an SVG that draw themselves as you scroll. GSAP DrawSVGPlugin and ScrollTrigger, drawn under reduced motion.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/svg-line-draw/svg-line-draw.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "velocity-marquee",
+      "type": "registry:component",
+      "title": "Velocity marquee",
+      "description": "An endless marquee that speeds up and leans with scroll velocity. GSAP ScrollTrigger, with a pause button.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/velocity-marquee/velocity-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "inertia-carousel",
       "type": "registry:component",
       "title": "Inertia carousel",
@@ -38,6 +233,84 @@
       "files": [
         {
           "path": "registry/hz/inertia-carousel/inertia-carousel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "route-transition",
+      "type": "registry:component",
+      "title": "Route transition",
+      "description": "A curtain wipe between App Router pages that lifts once the new route has rendered. GSAP with next/navigation.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/route-transition/route-transition.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cursor-follower",
+      "type": "registry:component",
+      "title": "Cursor follower",
+      "description": "A dot that trails the mouse and wraps buttons and links. GSAP quickTo, decorative, mouse only.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/cursor-follower/cursor-follower.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toast-stack",
+      "type": "registry:component",
+      "title": "Toast stack",
+      "description": "Stacked notifications that pop in, make room with Flip, and swipe away. GSAP Flip and Draggable, aria-live.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/toast-stack/toast-stack.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "draggable-bottom-sheet",
+      "type": "registry:component",
+      "title": "Draggable bottom sheet",
+      "description": "A bottom sheet with springy snap points you can drag or flick. GSAP Draggable, dialog semantics.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/draggable-bottom-sheet/draggable-bottom-sheet.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cursor-image-trail",
+      "type": "registry:component",
+      "title": "Cursor image trail",
+      "description": "Images that drop and drift behind the cursor. GSAP core with a reused element pool.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/cursor-image-trail/cursor-image-trail.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "preloader-handoff",
+      "type": "registry:component",
+      "title": "Preloader handoff",
+      "description": "A counter preloader that hands off to the hero animation. GSAP timeline with the position parameter.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/preloader-handoff/preloader-handoff.tsx",
           "type": "registry:component"
         }
       ]
