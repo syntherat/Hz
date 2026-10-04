@@ -41,7 +41,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   let body: React.ReactNode;
   let lineCount: number | null = null;
 
-  if (d) {
+  if (d && recipe.ready) {
     const source = await readSource(d.file);
     lineCount = source.trimEnd().split("\n").length;
     const [lines, installLines] = await Promise.all([
@@ -75,13 +75,13 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
         <div className="dot-grid flex h-[140px] w-[220px] items-center justify-center rounded-[14px] bg-stage">
           <Curve ease={recipe.ease} className="h-[88px] w-[140px]" />
         </div>
-        <span className="eyebrow">Not built yet</span>
+        <span className="eyebrow">Coming soon</span>
         <p className="max-w-md text-ink-2">
-          {recipe.summary} It will use <span className="font-mono text-ink">{recipe.plugins}</span> with{" "}
-          <span className="font-mono text-ink">{recipe.ease}</span>. Recipes ship one at a time, each fully tuned and documented.
+          {recipe.summary} It uses <span className="font-mono text-ink">{recipe.plugins}</span> with{" "}
+          <span className="font-mono text-ink">{recipe.ease}</span>. It ships in a later batch, with its live demo, knobs and notes.
         </p>
-        <Link href="/recipes/magnetic-button" className="flex h-11 items-center rounded-xl bg-ink px-4 text-sm font-medium text-ground hover:bg-ink-2">
-          Try R01 Magnetic button
+        <Link href="/#recipes" className="flex h-11 items-center rounded-xl bg-ink px-4 text-sm font-medium text-ground hover:bg-ink-2">
+          Browse ready recipes
         </Link>
       </section>
     );

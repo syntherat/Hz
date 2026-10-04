@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { SineMark } from "@/components/wordmark";
 import { recipes } from "@/content/recipes";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -73,7 +74,9 @@ export default function AboutPage() {
           Built on <a href="https://gsap.com" className="text-ink underline underline-offset-4">GSAP</a>, which became free for everyone in
           2025. Distributed through the{" "}
           <a href="https://ui.shadcn.com/docs/registry" className="text-ink underline underline-offset-4">shadcn registry</a>. Type set in
-          Geist. Made by [your name].
+          Geist. Made by{" "}
+          <a href={site.author.url} className="text-ink underline underline-offset-4">{site.author.name}</a>. The code is MIT licensed and
+          on <a href={site.github} className="text-ink underline underline-offset-4">GitHub</a>.
         </p>
         <Link href="/docs" className="text-sm text-muted hover:text-ink">
           Read the docs →

@@ -22,7 +22,7 @@ export function Sidebar({ current }: { current: string }) {
                 >
                   <span className="w-7 font-mono text-xs text-muted">{r.id}</span>
                   <span className="flex-1">{r.name}</span>
-                  {!r.ready && <span className="size-1 rounded-full bg-line-strong" aria-label="Not built yet" />}
+                  {!r.ready && <span className="size-1 rounded-full bg-line-strong" aria-label="Coming soon" />}
                 </Link>
               );
             })}

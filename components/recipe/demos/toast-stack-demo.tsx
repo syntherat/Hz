@@ -7,7 +7,7 @@ import type { DemoProps } from "@/components/recipe/demos";
 import { Tool, Tools, useSettled, useTicker } from "@/components/recipe/demos/kit";
 
 const messages = [
-  ["Copied", "npx shadcn add hz.dev/r/toast-stack"],
+  ["Copied", "npx shadcn add hz.sounakpal.dev/r/toast-stack"],
   ["Saved", "Knob values written to the file."],
   ["Build passed", "24 pages generated."],
   ["Link shared", "Anyone with the link can view."],

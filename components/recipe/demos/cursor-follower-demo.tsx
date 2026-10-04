@@ -35,7 +35,7 @@ export function CursorFollowerDemo({ values, reduced, onReadout }: DemoProps) {
         </button>
       </div>
       <a href="#" onClick={(e) => e.preventDefault()} className="font-mono text-xs text-muted hover:text-ink">
-        hz.dev/r/cursor-follower
+        hz.sounakpal.dev/r/cursor-follower
       </a>
     </div>
   );

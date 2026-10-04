@@ -13,6 +13,32 @@ function bounceOut(t: number) {
   return n * (t -= 2.625 / d) * t + 0.984375;
 }
 
+// css has no elastic or bounce, so sample the curve and keep only the points that matter (ramer-douglas-peucker)
+function linearCss(fn: EaseFn, tolerance = 0.002) {
+  const pts = Array.from({ length: 401 }, (_, i) => [i / 400, fn(i / 400)] as const);
+  const keep = new Set([0, pts.length - 1]);
+  const walk = (a: number, b: number) => {
+    let far = -1;
+    let max = tolerance;
+    for (let i = a + 1; i < b; i++) {
+      const t = (pts[i][0] - pts[a][0]) / (pts[b][0] - pts[a][0]);
+      const d = Math.abs(pts[i][1] - (pts[a][1] + t * (pts[b][1] - pts[a][1])));
+      if (d > max) [max, far] = [d, i];
+    }
+    if (far < 0) return;
+    keep.add(far);
+    walk(a, far);
+    walk(far, b);
+  };
+  walk(0, pts.length - 1);
+  const stops = [...keep].sort((x, y) => x - y).map((i, n, all) => {
+    const [t, p] = pts[i];
+    const v = +p.toFixed(3);
+    return n === 0 || n === all.length - 1 ? `${v}` : `${v} ${+(t * 100).toFixed(1)}%`;
+  });
+  return `linear(${stops.join(", ")})`;
+}
+
 export const eases: Record<string, { fn: EaseFn; css: string; note: string }> = {
   none: {
     fn: (t) => t,
@@ -61,12 +87,12 @@ export const eases: Record<string, { fn: EaseFn; css: string; note: string }> = 
   },
   "elastic.out(1, 0.3)": {
     fn: (t) => (t === 0 ? 0 : t === 1 ? 1 : 2 ** (-10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1),
-    css: "linear(...) only",
+    css: linearCss((t) => (t === 0 ? 0 : t === 1 ? 1 : 2 ** (-10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1)),
     note: "Springs back and forth before resting. Playful, use it sparingly.",
   },
   "bounce.out": {
     fn: bounceOut,
-    css: "linear(...) only",
+    css: linearCss(bounceOut),
     note: "Drops and bounces like a ball. Literal, keep it for playful moments.",
   },
 };

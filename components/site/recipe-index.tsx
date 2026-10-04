@@ -57,7 +57,7 @@ export function RecipeIndex() {
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-hairline px-6 py-16 text-center">
           <span className="eyebrow">Nothing here yet</span>
           <p className="max-w-md text-ink-2">
-            No finished recipes in {filter === "All" ? "this view" : filter} yet. They ship one at a time.
+            No finished recipes in {filter === "All" ? "this view" : filter} yet. More ship in batches after launch.
           </p>
           <button type="button" onClick={() => setReadyOnly(false)} className="h-10 rounded-lg border border-hairline px-4 text-sm hover:bg-surface">
             Show upcoming recipes too

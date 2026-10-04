@@ -3,8 +3,9 @@ export const site = {
   tagline: "Motion, measured.",
   description:
     "Interaction recipes for Next.js, built with GSAP. Tune each one live, read why it works, then copy the code or install it with one command.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hz.dev").replace(/\/$/, ""),
-  github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "",
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://hz.sounakpal.dev").replace(/\/$/, ""),
+  github: process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/syntherat/Hz",
+  author: { name: "Sounak Pal", url: "https://sounakpal.dev" },
 };
 
 export function installCommand(slug: string) {

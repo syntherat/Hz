@@ -12,7 +12,7 @@ export function Header() {
         <div className="ml-auto flex flex-wrap items-center gap-2.5">
           <CommandMenu />
           <a
-            href={site.github || "#"}
+            href={site.github}
             className="hidden h-10 items-center gap-2 rounded-[10px] bg-ink px-3.5 text-sm text-ground hover:bg-ink-2 sm:flex"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">
