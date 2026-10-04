@@ -194,7 +194,7 @@ export default async function DocsPage() {
               </dd>
             </div>
             <div className="flex flex-col gap-1.5">
-              <dt className="font-medium">A recipe says &ldquo;soon&rdquo;.</dt>
+              <dt className="font-medium">A recipe says &ldquo;Coming soon&rdquo;.</dt>
               <dd className="leading-[1.65] text-ink-2">
                 It&apos;s queued for a later release. Recipes ship in batches, each with its notes and registry entry.{" "}
                 <Link href="/" className="text-ink underline underline-offset-4">See what&apos;s ready</Link>.

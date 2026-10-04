@@ -7,7 +7,8 @@ import { Curve } from "@/components/curve";
 import { details } from "@/content/details";
 import { getRecipe, neighbours, recipes } from "@/content/recipes";
 import { highlight, highlightWithKnobs, readSource } from "@/lib/highlight";
-import { installCommand } from "@/lib/site";
+import { installCommand, site } from "@/lib/site";
+import { SoonBadge } from "@/components/site/soon-badge";
 
 export const dynamicParams = false;
 
@@ -71,18 +72,25 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
     );
   } else {
     body = (
-      <section className="flex flex-col items-center gap-5 rounded-[20px] border border-dashed border-hairline px-6 py-16 text-center">
-        <div className="dot-grid flex h-[140px] w-[220px] items-center justify-center rounded-[14px] bg-stage">
-          <Curve ease={recipe.ease} className="h-[88px] w-[140px]" />
+      <section className="rounded-[20px] border border-dashed border-line-strong bg-surface p-2">
+        <div className="dot-grid flex flex-col items-center rounded-[14px] bg-stage px-6 py-12 text-center">
+          <div className="flex flex-col items-center gap-5">
+            <Curve ease={recipe.ease} className="h-[88px] w-[140px] opacity-60" />
+            <h2 className="max-w-md text-[28px] leading-tight font-medium tracking-[-0.03em]">This recipe ships in a later batch.</h2>
+            <p className="max-w-md text-ink-2">
+              {recipe.summary} It uses <span className="font-mono text-ink">{recipe.plugins}</span> with{" "}
+              <span className="font-mono text-ink">{recipe.ease}</span>, and arrives with its live demo, knobs and notes.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              <Link href="/#recipes" className="flex h-11 items-center rounded-xl bg-ink px-4 text-sm font-medium text-ground hover:bg-ink-2">
+                Browse ready recipes
+              </Link>
+              <a href={site.github} className="flex h-11 items-center rounded-xl border border-hairline px-4 text-sm text-ink hover:bg-hairline">
+                Follow on GitHub
+              </a>
+            </div>
+          </div>
         </div>
-        <span className="eyebrow">Coming soon</span>
-        <p className="max-w-md text-ink-2">
-          {recipe.summary} It uses <span className="font-mono text-ink">{recipe.plugins}</span> with{" "}
-          <span className="font-mono text-ink">{recipe.ease}</span>. It ships in a later batch, with its live demo, knobs and notes.
-        </p>
-        <Link href="/#recipes" className="flex h-11 items-center rounded-xl bg-ink px-4 text-sm font-medium text-ground hover:bg-ink-2">
-          Browse ready recipes
-        </Link>
       </section>
     );
   }
@@ -95,6 +103,11 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
           <nav aria-label="Breadcrumb" className="font-mono text-xs text-muted">
             <Link href="/" className="hover:text-ink">Recipes</Link> / {recipe.section} / {recipe.id}
           </nav>
+          {!recipe.ready && (
+            <div>
+              <SoonBadge large />
+            </div>
+          )}
           <h1 className="text-[38px] leading-none font-medium tracking-[-0.045em] sm:text-[56px]">{recipe.name}</h1>
           <p className="max-w-[640px] text-lg leading-[1.55] text-ink-2">{d?.description ?? recipe.summary}</p>
           <div className="flex flex-wrap gap-2">
