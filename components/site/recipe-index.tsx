@@ -6,7 +6,7 @@ import { RecipeCard } from "@/components/site/recipe-card";
 
 type Filter = "All" | Section;
 
-export function RecipeIndex() {
+export function RecipeIndex({ durations }: { durations: Record<string, number> }) {
   const [filter, setFilter] = useState<Filter>("All");
   const [readyOnly, setReadyOnly] = useState(false);
 
@@ -66,7 +66,7 @@ export function RecipeIndex() {
       ) : (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
           {shown.map((r) => (
-            <RecipeCard key={r.slug} recipe={r} />
+            <RecipeCard key={r.slug} recipe={r} duration={durations[r.slug]} />
           ))}
         </div>
       )}

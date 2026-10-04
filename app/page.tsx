@@ -1,6 +1,7 @@
 import { HeroStage } from "@/components/site/hero-stage";
 import { InstallChip } from "@/components/site/install-chip";
 import { RecipeIndex } from "@/components/site/recipe-index";
+import { details } from "@/content/details";
 import { recipes } from "@/content/recipes";
 import { site } from "@/lib/site";
 
@@ -11,6 +12,14 @@ const specs = [
   { k: "Accessibility", v: "Reduced-motion fallback" },
   { k: "Install", v: "Copy, or shadcn CLI" },
 ];
+
+// only real "Duration" knobs; R24's duration is the counter, not its exit ease
+const durations = Object.fromEntries(
+  Object.entries(details).flatMap(([slug, d]) => {
+    const k = d.knobs.find((k) => k.id === "duration" && k.label === "Duration");
+    return k && typeof k.default === "number" ? [[slug, k.default]] : [];
+  }),
+);
 
 export default function Home() {
   return (
@@ -41,7 +50,7 @@ export default function Home() {
         </dl>
       </section>
 
-      <RecipeIndex />
+      <RecipeIndex durations={durations} />
     </main>
   );
 }

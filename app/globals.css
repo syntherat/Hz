@@ -58,3 +58,45 @@
     color: var(--color-ground);
   }
 }
+
+/* x runs linear while y runs on the ease's css timing, so the dot traces the card's curve at the recipe's duration.
+   no transition at rest, so it snaps back instead of rewinding */
+.curve-dot {
+  position: absolute;
+  top: 82.5px;
+  left: -5px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.curve-dot > span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-ink);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group:hover .curve-dot {
+    opacity: 1;
+    transform: translateX(150px);
+    transition: transform var(--dur) linear;
+  }
+  .group:hover .curve-dot > span {
+    transform: translateY(-62.5px);
+    transition: transform var(--dur) var(--ease);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .group:focus-visible .curve-dot {
+    opacity: 1;
+    transform: translateX(150px);
+    transition: transform var(--dur) linear;
+  }
+  .group:focus-visible .curve-dot > span {
+    transform: translateY(-62.5px);
+    transition: transform var(--dur) var(--ease);
+  }
+}
