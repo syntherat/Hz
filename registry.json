@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "hz",
+  "homepage": "https://hz.dev",
+  "items": [
+    {
+      "name": "magnetic-button",
+      "type": "registry:component",
+      "title": "Magnetic button",
+      "description": "A button that leans toward the cursor and springs back when it leaves. GSAP quickTo, reduced-motion aware.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "registry/hz/magnetic-button/magnetic-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
