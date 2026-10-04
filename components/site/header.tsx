@@ -4,6 +4,7 @@ import { CommandMenu } from "@/components/site/command-menu";
 import { site } from "@/lib/site";
 import { formatStars, getStars } from "@/lib/github";
 
+// a tiny count reads worse than none, so it only shows from 10 stars
 export async function Header() {
   const stars = await getStars();
   return (
@@ -21,7 +22,7 @@ export async function Header() {
               <path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6L5.7 21l1.5-7L2 9.3l7-.8z" />
             </svg>
             Star on GitHub
-            {stars !== null && (
+            {stars !== null && stars >= 10 && (
               <span className="font-mono text-xs text-[#5a5a60]" aria-label={`${stars} stars`}>
                 {formatStars(stars)}
               </span>
