@@ -2,8 +2,10 @@ import { Wordmark } from "@/components/wordmark";
 import { NavLinks } from "@/components/site/nav-links";
 import { CommandMenu } from "@/components/site/command-menu";
 import { site } from "@/lib/site";
+import { formatStars, getStars } from "@/lib/github";
 
-export function Header() {
+export async function Header() {
+  const stars = await getStars();
   return (
     <header className="border-b border-hairline">
       <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3.5 sm:px-6">
@@ -19,7 +21,11 @@ export function Header() {
               <path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6L5.7 21l1.5-7L2 9.3l7-.8z" />
             </svg>
             Star on GitHub
-            <span className="font-mono text-xs text-[#5a5a60]">[stars]</span>
+            {stars !== null && (
+              <span className="font-mono text-xs text-[#5a5a60]" aria-label={`${stars} stars`}>
+                {formatStars(stars)}
+              </span>
+            )}
           </a>
         </div>
       </div>
