@@ -8,6 +8,7 @@ type CopyButtonProps = {
   copiedLabel?: ReactNode;
   className?: string;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 };
 
 export function CopyIcon() {
@@ -27,6 +28,26 @@ function CheckIcon() {
   );
 }
 
+// navigator.clipboard only exists on https and localhost, so a phone on the LAN ip needs the old textarea trick
+function legacyCopy(value: string) {
+  const active = document.activeElement as HTMLElement | null;
+  const area = document.createElement("textarea");
+  area.value = value;
+  area.setAttribute("readonly", "");
+  // 16px stops iOS from zooming in on focus
+  area.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px;";
+  document.body.appendChild(area);
+  area.select();
+  area.setSelectionRange(0, value.length);
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {}
+  area.remove();
+  active?.focus({ preventScroll: true });
+  return ok;
+}
+
 export function CopyButton({ text, label, copiedLabel = "Copied", className, ...rest }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
@@ -37,18 +58,23 @@ export function CopyButton({ text, label, copiedLabel = "Copied", className, ...
   }, [copied]);
 
   async function copy() {
+    const value = typeof text === "function" ? text() : text;
+    if (!navigator.clipboard) {
+      setCopied(legacyCopy(value));
+      return;
+    }
     try {
-      await navigator.clipboard.writeText(typeof text === "function" ? text() : text);
+      await navigator.clipboard.writeText(value);
       setCopied(true);
     } catch {
-      setCopied(false);
+      setCopied(legacyCopy(value));
     }
   }
 
   const iconOnly = label === undefined;
 
   return (
-    <button type="button" onClick={copy} className={className} aria-label={rest["aria-label"]}>
+    <button type="button" onClick={copy} className={className} aria-label={rest["aria-label"]} aria-describedby={rest["aria-describedby"]}>
       {iconOnly ? copied ? <CheckIcon /> : <CopyIcon /> : copied ? copiedLabel : label}
       <span className="sr-only" aria-live="polite">
         {copied ? "Copied to clipboard" : ""}

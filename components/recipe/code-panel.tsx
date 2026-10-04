@@ -70,7 +70,16 @@ export function CodePanel({ fileName, lines, installLines, knobs, values, code, 
           </button>
         </div>
         <div className="flex flex-wrap gap-1.5">
-          <CopyButton text={prompt} label="Copy as prompt" className={ghost} />
+          <span className="group relative">
+            <CopyButton text={prompt} label="Copy as prompt" className={ghost} aria-describedby="copy-prompt-tip" />
+            <span
+              id="copy-prompt-tip"
+              role="tooltip"
+              className="pointer-events-none absolute top-full left-0 z-10 mt-2 hidden w-64 max-w-[calc(100vw-2rem)] rounded-lg border border-line-strong bg-console px-3 py-2 text-xs leading-[18px] text-code shadow-lg group-hover:block group-has-focus-visible:block sm:right-0 sm:left-auto"
+            >
+              A ready-made request for an AI assistant like Claude, Cursor or Copilot: the rules, install command and code at your knob values.
+            </span>
+          </span>
           <CopyButton
             text={tab === "code" ? code : () => install}
             label="Copy"
